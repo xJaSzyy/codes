@@ -1,20 +1,20 @@
-https://onlinegdb.com/lOeqgkEw8N
-#include <string>
-#include <fstream>
+https://onlinegdb.com/ov-cTk-ewq
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <map>
 using namespace std;
 
 void func(string s) {
   map <string, int> a;
-
-  for (int i = 0; i < s.length() - 2; ++i) {
-    string sb = s.substr(i, 2);
+    
+  for (int countOne = 0; countOne < s.length() - 2; ++countOne) {
+    string sb = s.substr(countOne, 2);
     if (a.count(sb) > 0) {
         continue;
     }
-    for (int j = i + 1; j < s.length() - 1; ++j) {
-      if (sb == s.substr(j, 2))
+    for (int countTwo = countOne + 1; countTwo < s.length() - 1; ++countTwo) {
+      if (sb == s.substr(countTwo, 2))
         a[sb]++;
     }
   }
@@ -24,8 +24,36 @@ void func(string s) {
 }
 
 int main() {
-  string str;
+  setlocale(LC_ALL, "Russian");
+  char text; string str;
+  ifstream fin("text.txt");
+  
+  string vs, filter;
+  bool f = true;
+  
+  //Однобуквенные сочетания
+  
+  while (getline(fin, vs)) {
+    for (int count = 0; count < vs.length(); ++count) {
+      if ((vs[count] >= 'a' && vs[count] <= 'z') || (vs[count] >= 'A' && vs[count] <= 'Z')) {
+        filter = filter + vs[count];
+        f = true;
+      }
+    }
+  }
 
+  for (int count = 0; count < filter.length(); ++count)
+    filter[count] = tolower(filter[count]);
+
+  map <char, int> string_map; 
+  for (auto vse : filter) ++string_map[vse];
+  for (auto vse : string_map) cout << vse.first << " - " << vse.second << endl;
+  cout << endl;
+    
+  fin.close();
+    
+  //Двухбуквенные сочетания
+  
   ifstream file("text.txt");
   if (file) {
     char ch;
@@ -36,5 +64,6 @@ int main() {
   else {
     cout  <<  "Файл не найден"  <<  endl;
   }
+  file.close();
   return 0;
 }
