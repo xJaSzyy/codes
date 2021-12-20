@@ -1,0 +1,73 @@
+https://onlinegdb.com/YDAo5kJDI
+#include <iostream>
+using namespace std;
+
+const int size = 8;
+ 
+int board[size][size];
+int temp = 0, resultCount = 0;
+
+void showBoard() {
+    for(int vertical = 0; vertical < size; ++vertical) {
+      for(int horizontal = 0; horizontal < size; ++horizontal) {
+        cout << ((board[vertical][horizontal]) ? "1 " : "0 ");
+      }
+      cout << '\n';
+    }
+}
+ 
+// Функция tryQueen() - проверяет нет ли уже установленных ферзей
+
+bool tryQueen(int vertical, int horizontal) {
+    for(int i = 0; i < vertical; ++i) {
+      if(board[i][horizontal]) {
+        return false;
+      }
+    }
+    
+    for(int i = 1; i <= vertical && horizontal-i >= 0; ++i) {
+      if(board[vertical-i][horizontal-i]) {
+        return false;
+      }
+    }
+    
+    for(int i = 1; i <= vertical && horizontal+i < size; i++) {
+      if(board[vertical-i][horizontal+i]) {
+        return false;
+      }
+    }
+    return true;
+}
+ 
+// Функция setQueen() - пробует найти результаты решений.
+
+void setQueen(int vertical) { 
+    if(vertical == size) {
+      ++resultCount;
+      if(resultCount == temp) {
+          showBoard();
+      }
+      return;
+    }
+    for(int i = 0; i < size; ++i) {
+      if(tryQueen(vertical, i)) {
+        board[vertical][i] = 1;
+        setQueen(vertical+1);
+        board[vertical][i] = 0;
+      }
+    }
+    
+    return; 
+}
+ 
+int main() {
+    setlocale(LC_ALL, "Russian");
+    cout << "Введите номер решения: ";
+    cin  >> temp;
+    setQueen(0);
+    cout << "Всего решений: " << resultCount;
+    return 0;
+}
+
+
+
