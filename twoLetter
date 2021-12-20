@@ -1,4 +1,4 @@
-https://onlinegdb.com/BOdd0I8Y6f
+https://onlinegdb.com/9HuEz-Tcv
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -42,7 +42,7 @@ void oneLetter() {
 
   map <char, int> string_map; 
   for (auto vse : filter) ++string_map[vse];
-  for (auto vse : string_map) cout << vse.first << " - " << vse.second << endl;
+  for (auto vse : string_map) cout << vse.first << ": " << vse.second << endl;
   cout << endl;
   fin.close();
 }
