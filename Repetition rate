@@ -1,25 +1,25 @@
-https://onlinegdb.com/9HuEz-Tcv
+https://onlinegdb.com/OgI72FhKj
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <map>
 using namespace std;
 
-void twoLetter(string s) {
-  map <string, int> a;
-    
-  for (int countOne = 0; countOne < s.length() - 2; ++countOne) {
-    string sb = s.substr(countOne, 2);
-    if (a.count(sb) > 0) {
+void twoLetter(string line) {
+  map <string, int> fileText;
+
+  for (int countOne = 0; countOne < line.length() - 2; ++countOne) {
+    string sb = line.substr(countOne, 2);
+    if (fileText.count(sb) > 0) {
         continue;
     }
-    for (int countTwo = countOne + 1; countTwo < s.length() - 1; ++countTwo) {
-      if (sb == s.substr(countTwo, 2))
-        a[sb]++;
+    for (int countTwo = countOne + 1; countTwo < line.length() - 1; ++countTwo) {
+      if (sb == line.substr(countTwo, 2))
+        fileText[sb]++;
     }
   }
-  for (auto e : a) {
-    cout << e.first << ": " << e.second + 1 << endl;
+  for (auto symbol : fileText) {
+    cout << symbol.first << ": " << symbol.second + 1 << endl;
   }
 }
 
@@ -27,7 +27,7 @@ void oneLetter() {
   ifstream fin("text.txt");
   string vs, filter;
   bool f = true;
-  
+
   while (getline(fin, vs)) {
     for (int count = 0; count < vs.length(); ++count) {
       if ((vs[count] >= 'a' && vs[count] <= 'z') || (vs[count] >= 'A' && vs[count] <= 'Z')) {
@@ -36,13 +36,13 @@ void oneLetter() {
       }
     }
   }
-  
+
   for (int count = 0; count < filter.length(); ++count)
     filter[count] = tolower(filter[count]);
 
-  map <char, int> string_map; 
-  for (auto vse : filter) ++string_map[vse];
-  for (auto vse : string_map) cout << vse.first << ": " << vse.second << endl;
+  map <char, int> stringMap;
+  for (auto vse : filter) ++stringMap[vse];
+  for (auto vse : stringMap) cout << vse.first << ": " << vse.second << endl;
   cout << endl;
   fin.close();
 }
@@ -53,7 +53,7 @@ int main() {
 
   //Однобуквенные сочетания
   oneLetter();
-    
+
   //Двухбуквенные сочетания
   ifstream file("text.txt");
   if (file) {
