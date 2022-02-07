@@ -1,0 +1,61 @@
+//Первое задание//
+
+/**************************
+ *Author: Novoselov Stepan*
+ *Date: 07.02.2022        *
+ **************************/
+using System;
+
+namespace Calculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int Result = 1;
+            int RealNumber = Convert.ToInt32(Console.ReadLine());
+            int Power = Convert.ToInt32(Console.ReadLine());
+            for (int count = 0; count < Power; ++count)
+            {
+                Result *= RealNumber;
+            }
+            Console.WriteLine(Result);
+        }
+    }
+}
+
+//Второе задание//
+
+/**************************
+ *Author: Novoselov Stepan*
+ *Date: 07.02.2022        *
+ **************************/
+using System;
+
+namespace Calculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int FirstNumber = Convert.ToInt32(Console.ReadLine());
+            int SecondNumber = FirstNumber;
+            int Temp, Help, Count = 0;
+            while (SecondNumber / 100 != 0 )
+            {
+                SecondNumber /= 10;
+                Count += 1;
+            }
+            Temp = SecondNumber % 10;
+            SecondNumber /= 10;
+            for (int consider = 0; consider < Count; ++consider)
+            {
+                Help = FirstNumber % 10;
+                SecondNumber = int.Parse(SecondNumber.ToString() + Help);
+            }
+            SecondNumber = int.Parse(SecondNumber.ToString() + Temp);
+
+            Console.WriteLine(SecondNumber);
+        }
+    }
+}
