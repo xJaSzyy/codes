@@ -1,0 +1,44 @@
+/**************************
+ *Author: Novoselov Stepan*
+ *Date: 07.02.2022        *
+ **************************/
+using System;
+
+namespace Calculator
+{
+    class Document
+    {
+        public string name = "Undefined";
+        public string author = "Undefined";
+        public string keywords = "Undefined";
+        public string themes = "Undefined";
+        public string pathToFile = "Undefined";
+    }
+    class Word : Document
+    {
+
+    }
+    class PFD : Document
+    {
+
+    }
+    class Excel : Document
+    {
+
+    }
+    class TXT : Document
+    {
+
+    }
+    class HTML : Document
+    {
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+        }
+    }
+}
