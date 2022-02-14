@@ -1,9 +1,10 @@
 //Первое задание//
 
-/**************************
- *Author: Novoselov Stepan*
- *Date: 07.02.2022        *
- **************************/
+/***************************
+ *Author: Novoselov Stepan *
+ *Date: 14.02.2022         *
+ *Exercise 1.1             *
+ ***************************/
 using System;
 
 namespace Calculator
@@ -15,7 +16,7 @@ namespace Calculator
             int Result = 1;
             int RealNumber = Convert.ToInt32(Console.ReadLine());
             int Power = Convert.ToInt32(Console.ReadLine());
-            for (int count = 0; count < Power; ++count)
+            for (int DigitIndex = 0; DigitIndex < Power; ++DigitIndex)
             {
                 Result *= RealNumber;
             }
