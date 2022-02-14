@@ -27,10 +27,11 @@ namespace Calculator
 
 //Второе задание//
 
-/**************************
- *Author: Novoselov Stepan*
- *Date: 07.02.2022        *
- **************************/
+/***************************
+ *Author: Novoselov Stepan *
+ *Date: 14.02.2022         *
+ *Exercise 1.2             *
+ ***************************/
 using System;
 
 namespace Calculator
@@ -39,24 +40,24 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            int FirstNumber = Convert.ToInt32(Console.ReadLine());
-            int SecondNumber = FirstNumber;
-            int Temp, Help, Count = 0;
-            while (SecondNumber / 100 != 0 )
+            int FirstDigit = Convert.ToInt32(Console.ReadLine());
+            int SecondDigit = FirstDigit;
+            int LastDigit, AuxiliaryVariable, Count = 0;
+            while (SecondDigit / 100 != 0)
             {
-                SecondNumber /= 10;
+                SecondDigit /= 10;
                 Count += 1;
             }
-            Temp = SecondNumber % 10;
-            SecondNumber /= 10;
-            for (int consider = 0; consider < Count; ++consider)
+            LastDigit = SecondDigit % 10;
+            SecondDigit /= 10;
+            for (int Consider = 0; Consider < Count; ++Consider)
             {
-                Help = FirstNumber % 10;
-                SecondNumber = int.Parse(SecondNumber.ToString() + Help);
+                AuxiliaryVariable = FirstDigit % 10;
+                SecondDigit = int.Parse(SecondDigit.ToString() + AuxiliaryVariable);
             }
-            SecondNumber = int.Parse(SecondNumber.ToString() + Temp);
+            SecondDigit = int.Parse(SecondDigit.ToString() + LastDigit);
 
-            Console.WriteLine(SecondNumber);
+            Console.WriteLine(SecondDigit);
         }
     }
 }
