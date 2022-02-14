@@ -1,44 +1,68 @@
-/**************************
- *Author: Novoselov Stepan*
- *Date: 07.02.2022        *
- **************************/
+/***************************
+ *Author: Novoselov Stepan *
+ *Date: 14.02.2022         *
+ *Exercise 2               *
+ ***************************/
 using System;
 
 namespace Calculator
 {
     class Document
     {
-        public string name = "Undefined";
-        public string author = "Undefined";
-        public string keywords = "Undefined";
-        public string themes = "Undefined";
-        public string pathToFile = "Undefined";
+        public string name = "";
+        public string author = "";
+        public string keyWords = "";
+        public string themes = "";
+        public string pathToFile = "";
+        public void getInfo()
+        {
+            Console.WriteLine($"Название документа: {name} \nАвтор: {author}");
+        }
     }
     class Word : Document
     {
-
-    }
-    class PFD : Document
-    {
-
+        public int numberOfPages = 0;
+        public void printWord()
+        {
+            Console.WriteLine($"Количество страниц: {numberOfPages}");
+        }
     }
     class Excel : Document
     {
-
+        public int numberOfBusyLines = 0;
+        public void printExcel()
+        {
+            Console.WriteLine($"Количество занятых строк: {numberOfBusyLines}");
+        }
     }
-    class TXT : Document
-    {
 
-    }
-    class HTML : Document
-    {
-
-    }
     class Program
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Выберите документ: ");
+            string whichDocument = Convert.ToString(Console.ReadLine());
+            //Общая информация
+            Document document = new Document();
+            document.name = "document pi-211";
+            document.author = "Novoselov Stepan";
+            document.getInfo();
 
+            //Информация присущая только Word
+            if (whichDocument == "Word")
+            {
+                Word wordDocument = new Word();
+                wordDocument.numberOfPages = 2;
+                wordDocument.printWord();
+            }
+
+            //Информация присущая только Excel
+            if (whichDocument == "Excel")
+            {
+                Excel excelDocument = new Excel();
+                excelDocument.numberOfBusyLines = 49;
+                excelDocument.printExcel();
+            }
         }
     }
 }
