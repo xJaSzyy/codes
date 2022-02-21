@@ -1,13 +1,14 @@
 /***************************
  *Author: Novoselov Stepan *
- *Date: 14.02.2022         *
+ *Date: 21.02.2022         *
  *Exercise 2               *
  ***************************/
 using System;
 
 namespace Calculator
 {
-    class Document
+    
+     public class Document : Word
     {
         public string name = "";
         public string author = "";
@@ -19,50 +20,68 @@ namespace Calculator
             Console.WriteLine($"Название документа: {name} \nАвтор: {author}");
         }
     }
-    class Word : Document
+
+    public class Word : Excel
     {
         public int numberOfPages = 0;
-        public void printWord()
+        public void PrintWord()
         {
             Console.WriteLine($"Количество страниц: {numberOfPages}");
         }
     }
-    class Excel : Document
+    public class Excel
     {
-        public int numberOfBusyLines = 0;
-        public void printExcel()
+        public int filledColumns = 0;
+        public void PrintExcel()
         {
-            Console.WriteLine($"Количество занятых строк: {numberOfBusyLines}");
+            Console.WriteLine($"Количество страниц: {filledColumns}");
         }
     }
+    
+    public class Menu : Document
+    {
+        public static Menu Instance
+        {
+            get
+            {
+                if (instance == null) instance = new Menu();
+                return instance;
+            }
+        }
+        public void GeneralOutput() { getInfo(); }
+        public void SeparateOutput()
+        {
+            string whichDocument = Convert.ToString(Console.ReadLine());
+            switch (whichDocument)
+            {
+                case "word":
+                    PrintWord();
+                    break;
+                case "excel":
+                    PrintExcel();
+                    break;
+            }
+        }
+        private Menu() { }
+        private static Menu instance;
+    }
+    
 
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Выберите документ: ");
-            string whichDocument = Convert.ToString(Console.ReadLine());
-            //Общая информация
-            Document document = new Document();
-            document.name = "document pi-211";
-            document.author = "Novoselov Stepan";
-            document.getInfo();
-
+            Random random = new Random();
+            
             //Информация присущая только Word
-            if (whichDocument == "Word")
-            {
-                Word wordDocument = new Word();
-                wordDocument.numberOfPages = 2;
-                wordDocument.printWord();
-            }
+            Menu.Instance.numberOfPages = random.Next(1,100);
+            Menu.Instance.filledColumns = random.Next(1, 100);
+            Menu.Instance.SeparateOutput();
 
-            //Информация присущая только Excel
-            if (whichDocument == "Excel")
-            {
-                Excel excelDocument = new Excel();
-                excelDocument.numberOfBusyLines = 49;
-                excelDocument.printExcel();
-            }
+            //Общая информация
+            Menu.Instance.name = "document pi-211";
+            Menu.Instance.author = "Novoselov Stepan";
+            Menu.Instance.GeneralOutput();
         }
     }
 }
