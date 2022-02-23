@@ -1,0 +1,84 @@
+/***************************
+ *Author: Novoselov Stepan *
+ *Date: 15.02.2022         *
+ *Exercise 3               *
+ ***************************/
+using System;
+
+namespace Program
+{
+    class Matrix
+    {
+        private int size;
+        public Matrix()
+        {
+            size = 3;
+        }
+        public int[,] mainArray = new int[100, 100];
+        public int[,] auxiliaryArray = new int[100, 100];
+
+        //Рандомное заполнение матрицы(ввод)
+        public void Input()
+        {
+            Random random = new Random();
+            for (int row = 0; row < size; ++row)
+            {
+                for (int column = 0; column < size; ++column)
+                {
+                    mainArray[row, column] = random.Next(1, 100);
+                }
+            }
+        }
+
+        //Вывод матрицы
+        public void Output()
+        {
+            for (int row = 0; row < size; ++row)
+            {
+                for (int column = 0; column < size; ++column)
+                {
+                    Console.Write(mainArray[row, column] + "\t");
+                }
+                Console.WriteLine("\n");
+            }
+        }
+
+        public void Addition(int[,] firstArray, int[,] secondArray)
+        {
+            for (int row = 0; row < size; ++row)
+            {
+                for (int column = 0; column < size; ++column)
+                {
+                    mainArray[row, column] = firstArray[row, column] + secondArray[row, column];
+                }
+            }
+        }
+
+    }
+    class MainProgram
+    {
+
+        static void Main(string[] args)
+        {
+            Matrix FirstMatrix = new Matrix();
+            Matrix SecondMatrix = new Matrix();
+            Matrix Result = new Matrix();
+
+            FirstMatrix.Input();
+            Console.WriteLine("  Первая матрица\n" + "-------------------");
+            FirstMatrix.Output();
+            Console.WriteLine("-------------------");
+
+            SecondMatrix.Input();
+            Console.WriteLine("  Вторая матрица\n" + "-------------------");
+            SecondMatrix.Output();
+            Console.WriteLine("-------------------");
+
+            Console.WriteLine("  Первая + Вторая\n" + "-------------------");
+            Result.Addition(FirstMatrix.mainArray, SecondMatrix.mainArray);
+            Result.Output();
+            Console.WriteLine("-------------------");
+
+        }
+    }
+}
