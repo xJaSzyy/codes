@@ -54,6 +54,26 @@ namespace Program
             }
         }
 
+        public void Multiplication(int[,] firstArray, int[,] secondArray)
+        {
+            for (int row = 0; row < size; ++row)
+            {
+                for (int column = 0; column < size; ++column)
+                {
+                    mainArray[row, column] = firstArray[row, column] * secondArray[row, column];
+                }
+            }
+        }
+        public void OverLoad()
+        {
+            for (int row = 0; row < size; ++row)
+            {
+                for (int column = 0; column < size; ++column)
+                {
+                    mainArray[row, column] = 0;
+                }
+            }
+        }
     }
     class MainProgram
     {
@@ -65,19 +85,26 @@ namespace Program
             Matrix Result = new Matrix();
 
             FirstMatrix.Input();
-            Console.WriteLine("  Первая матрица\n" + "-------------------");
+            Console.WriteLine("Первая матрица\n" + "--------------------");
             FirstMatrix.Output();
-            Console.WriteLine("-------------------");
+            Console.WriteLine("--------------------");
 
             SecondMatrix.Input();
-            Console.WriteLine("  Вторая матрица\n" + "-------------------");
+            Console.WriteLine("Вторая матрица\n" + "--------------------");
             SecondMatrix.Output();
-            Console.WriteLine("-------------------");
+            Console.WriteLine("--------------------");
 
-            Console.WriteLine("  Первая + Вторая\n" + "-------------------");
+            Console.WriteLine("Сложение\n" + "--------------------");
             Result.Addition(FirstMatrix.mainArray, SecondMatrix.mainArray);
             Result.Output();
-            Console.WriteLine("-------------------");
+            Console.WriteLine("--------------------");
+
+            Result.OverLoad();
+
+            Console.WriteLine("Умножение\n" + "--------------------");
+            Result.Multiplication(FirstMatrix.mainArray, SecondMatrix.mainArray);
+            Result.Output();
+            Console.WriteLine("--------------------");
 
         }
     }
