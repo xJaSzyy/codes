@@ -16,6 +16,7 @@ namespace Program
         }
         public int[,] mainArray = new int[100, 100];
         public int[,] auxiliaryArray = new int[100, 100];
+        public int DeterminantValue = 0;
 
         //Рандомное заполнение матрицы(ввод)
         public void Input()
@@ -74,26 +75,28 @@ namespace Program
                 }
             }
         }
-        public void Determinant(int[,] a)
+        public void Determinant(int[,] mainArray)
         {
-            int DeterminantValue = 0;
-            DeterminantValue = a[0, 0] * a[1, 1] * a[2, 2] + a[2, 0] * a[0, 1] * a[1, 2] + a[1, 0] * a[2, 1] * a[0, 2] - a[2, 0] * a[1, 1] * a[0, 2] - a[1, 0] * a[0, 1] * a[2, 2] - a[0, 0] * a[1, 2] * a[2, 1];
-            mainArray[0, 0] = DeterminantValue;
+            int Determinant = 0;
+            Determinant = mainArray[0, 0] * mainArray[1, 1] * mainArray[2, 2] + mainArray[2, 0] * mainArray[0, 1] * mainArray[1, 2] +
+                          mainArray[1, 0] * mainArray[2, 1] * mainArray[0, 2] - mainArray[2, 0] * mainArray[1, 1] * mainArray[0, 2] - 
+                          mainArray[1, 0] * mainArray[0, 1] * mainArray[2, 2] - mainArray[0, 0] * mainArray[1, 2] * mainArray[2, 1];
+            DeterminantValue = Determinant;
         }
 
-        public void Comparison(int [,] firstArray, int[,] secondArray)
+        public void Comparison(int det1, int det2)
         {
-            if (firstArray[0,0] > secondArray[0,0])
+            if (det1 > det2)
             {
-                Console.WriteLine($"Определитель первой матрицы больше и равен {firstArray[0, 0]}");
+                Console.WriteLine($"Определитель первой матрицы больше и равен {det1}");
             }
-            else if (firstArray[0,0] < secondArray[0,0])
+            else if (det1 < det2)
             {
-                Console.WriteLine($"Определитель второй матрицы больше и равен {secondArray[0, 0]}");
+                Console.WriteLine($"Определитель второй матрицы больше и равен {det2}");
             }
-            else if (firstArray[0,0] == secondArray[0,0])
+            else if (det1 == det2)
             {
-                Console.WriteLine($"Оба определителя матриц равны {firstArray[0, 0]}");
+                Console.WriteLine($"Оба определителя матриц равны {det1}");
             }
         }
     }
@@ -130,7 +133,7 @@ namespace Program
 
             FirstMatrix.Determinant(FirstMatrix.mainArray);
             SecondMatrix.Determinant(SecondMatrix.mainArray);
-            Result.Comparison(FirstMatrix.mainArray, SecondMatrix.mainArray);
+            Result.Comparison(FirstMatrix.DeterminantValue, SecondMatrix.DeterminantValue);
         }
     }
 }
