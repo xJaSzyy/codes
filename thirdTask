@@ -1,6 +1,6 @@
 /***************************
  *Author: Novoselov Stepan *
- *Date: 25.02.2022         *
+ *Date: 24.02.2022         *
  *Exercise 3               *
  ***************************/
 using System;
@@ -51,8 +51,8 @@ namespace Program
                 for (int row = 0; row < size; ++row)
                 {
                     for (int column = 0; column < size; ++column)
-                    {
-                        Console.Write($"{array[row, column]}/{DeterminantValue} \t");
+                    { 
+                        Console.Write(array[row, column] + $"/{DeterminantValue}\t\t");
                     }
                     Console.WriteLine("\n");
                 }
@@ -172,10 +172,15 @@ namespace Program
             Result.Comparison(FirstMatrix.DeterminantValue, SecondMatrix.DeterminantValue);
             Console.WriteLine("------------------------------------------------");
 
-            Console.WriteLine("Обратная матрица\n" + "--------------------");
+            Console.WriteLine("Первая обратная матрица\n" + "------------------------------------------------");
             FirstMatrix.ReverseMatrix(FirstMatrix.mainArray);
             FirstMatrix.ReverseMatrixOutput(FirstMatrix.auxiliaryArray);
-            Console.WriteLine("--------------------");
+            Console.WriteLine("------------------------------------------------");
+
+            Console.WriteLine("Вторая обратная матрица\n" + "------------------------------------------------");
+            SecondMatrix.ReverseMatrix(SecondMatrix.mainArray);
+            SecondMatrix.ReverseMatrixOutput(SecondMatrix.auxiliaryArray);
+            Console.WriteLine("------------------------------------------------");
 
 
             Console.ReadLine();
