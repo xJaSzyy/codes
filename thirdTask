@@ -186,6 +186,8 @@ namespace Program
             Console.WriteLine("------------------------------------------------");
             FirstMatrix.Determinant(FirstMatrix.MainArray);
             SecondMatrix.Determinant(SecondMatrix.MainArray);
+            Console.WriteLine("Определитель первой матрицы:" + FirstMatrix.DeterminantValue.GetHashCode());
+            Console.WriteLine("Определитель второй матрицы:" + SecondMatrix.DeterminantValue.GetHashCode());
             Result.Comparison(FirstMatrix.DeterminantValue, SecondMatrix.DeterminantValue);
             Console.WriteLine("------------------------------------------------");
 
@@ -208,7 +210,7 @@ namespace Program
             Console.WriteLine(SecondMatrix.DeterminantZero(SecondMatrix.DeterminantValue));
             Console.WriteLine("----------------");
 
-
+            
 
             Console.ReadLine();
         }
