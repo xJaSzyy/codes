@@ -46,13 +46,16 @@ namespace Program
 
         public void ReverseMatrixOutput(int[,] Array)
         {
+            string StringDeterminant = DeterminantValue.ToString();
             if (DeterminantValue != 0)
             {
                 for (int row = 0; row < size; ++row)
                 {
                     for (int column = 0; column < size; ++column)
                     {
-                        Console.Write(Array[row, column] + $"/{DeterminantValue}\t\t");
+                        string StringArray = Array[row, column].ToString();
+                        string ReverseMatrixElement = StringArray + "/" + StringDeterminant;
+                        Console.Write(ReverseMatrixElement + "  ");
                     }
                     Console.WriteLine("\n");
                 }
