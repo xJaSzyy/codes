@@ -116,7 +116,7 @@ namespace Program
             {
                 Console.WriteLine($"Определитель второй матрицы больше и равен {SecondDeterminant}");
             }
-            else if (FirstDeterminant == SecondDeterminant)
+            else if (Equals(FirstDeterminant, SecondDeterminant))
             {
                 Console.WriteLine($"Оба определителя матриц равны {FirstDeterminant}");
             }
@@ -156,16 +156,19 @@ namespace Program
             Matrix SecondMatrix = new Matrix();
             Matrix Result = new Matrix();
 
+            //Создание первой матрицы
             FirstMatrix.Input();
             Console.WriteLine("Первая матрица\n" + "--------------------");
             FirstMatrix.Output(FirstMatrix.MainArray);
             Console.WriteLine("--------------------");
 
+            //Создание второй матрицы
             SecondMatrix.Input();
             Console.WriteLine("Вторая матрица\n" + "--------------------");
             SecondMatrix.Output(SecondMatrix.MainArray);
             Console.WriteLine("--------------------");
 
+            //Сложение
             Console.WriteLine("Сложение\n" + "--------------------");
             Result.Addition(FirstMatrix.MainArray, SecondMatrix.MainArray);
             Result.Output(Result.MainArray);
@@ -173,6 +176,7 @@ namespace Program
 
             Result.OverLoad();
 
+            //Умножение
             Console.WriteLine("Умножение\n" + "--------------------");
             Result.Multiplication(FirstMatrix.MainArray, SecondMatrix.MainArray);
             Result.Output(Result.MainArray);
@@ -185,6 +189,7 @@ namespace Program
             Result.Comparison(FirstMatrix.DeterminantValue, SecondMatrix.DeterminantValue);
             Console.WriteLine("------------------------------------------------");
 
+            //Обратные матрицы
             Console.WriteLine("Первая обратная матрица\n" + "------------------------------------------------");
             FirstMatrix.ReverseMatrix(FirstMatrix.MainArray);
             FirstMatrix.ReverseMatrixOutput(FirstMatrix.AuxiliaryArray);
@@ -202,6 +207,8 @@ namespace Program
             Console.WriteLine("Вторая матрица\n" + "----------------");
             Console.WriteLine(SecondMatrix.DeterminantZero(SecondMatrix.DeterminantValue));
             Console.WriteLine("----------------");
+
+
 
             Console.ReadLine();
         }
