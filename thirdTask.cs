@@ -9,10 +9,10 @@ namespace Program
 {
     class Matrix
     {
-        private int size;
+        private int Size;
         public Matrix()
         {
-            size = 3;
+            Size = 3;
         }
         public int[,] MainArray = new int[100, 100];
         public int[,] AuxiliaryArray = new int[100, 100];
@@ -22,11 +22,11 @@ namespace Program
         public void Input()
         {
             Random random = new Random();
-            for (int row = 0; row < size; ++row)
+            for (int Row = 0; Row < Size; ++Row)
             {
-                for (int column = 0; column < size; ++column)
+                for (int Column = 0; Column < Size; ++Column)
                 {
-                    MainArray[row, column] = random.Next(1, 10);
+                    MainArray[Row, Column] = random.Next(1, 10);
                 }
             }
         }
@@ -34,11 +34,11 @@ namespace Program
         //Вывод матрицы
         public void Output(int[,] Array)
         {
-            for (int row = 0; row < size; ++row)
+            for (int Row = 0; Row < Size; ++Row)
             {
-                for (int column = 0; column < size; ++column)
+                for (int Column = 0; Column < Size; ++Column)
                 {
-                    Console.Write(Array[row, column] + "\t");
+                    Console.Write(Array[Row, Column] + "\t");
                 }
                 Console.WriteLine("\n");
             }
@@ -49,11 +49,11 @@ namespace Program
             string StringDeterminant = DeterminantValue.ToString();
             if (DeterminantValue != 0)
             {
-                for (int row = 0; row < size; ++row)
+                for (int Row = 0; Row < Size; ++Row)
                 {
-                    for (int column = 0; column < size; ++column)
+                    for (int Column = 0; Column < Size; ++Column)
                     {
-                        string StringArray = Array[row, column].ToString();
+                        string StringArray = Array[Row, Column].ToString();
                         string ReverseMatrixElement = StringArray + "/" + StringDeterminant;
                         Console.Write(ReverseMatrixElement + "  ");
                     }
@@ -68,32 +68,32 @@ namespace Program
 
         public void Addition(int[,] FirstArray, int[,] SecondArray)
         {
-            for (int row = 0; row < size; ++row)
+            for (int Row = 0; Row < Size; ++Row)
             {
-                for (int column = 0; column < size; ++column)
+                for (int Column = 0; Column < Size; ++Column)
                 {
-                    MainArray[row, column] = FirstArray[row, column] + SecondArray[row, column];
+                    MainArray[Row, Column] = FirstArray[Row, Column] + SecondArray[Row, Column];
                 }
             }
         }
 
         public void Multiplication(int[,] FirstArray, int[,] SecondArray)
         {
-            for (int row = 0; row < size; ++row)
+            for (int Row = 0; Row < Size; ++Row)
             {
-                for (int column = 0; column < size; ++column)
+                for (int Column = 0; Column < Size; ++Column)
                 {
-                    MainArray[row, column] = FirstArray[row, column] * SecondArray[row, column];
+                    MainArray[Row, Column] = FirstArray[Row, Column] * SecondArray[Row, Column];
                 }
             }
         }
         public void OverLoad()
         {
-            for (int row = 0; row < size; ++row)
+            for (int Row = 0; Row < Size; ++Row)
             {
-                for (int column = 0; column < size; ++column)
+                for (int Column = 0; Column < Size; ++Column)
                 {
-                    MainArray[row, column] = 0;
+                    MainArray[Row, Column] = 0;
                 }
             }
         }
@@ -141,7 +141,7 @@ namespace Program
             {
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
@@ -210,7 +210,7 @@ namespace Program
             Console.WriteLine(SecondMatrix.DeterminantZero(SecondMatrix.DeterminantValue));
             Console.WriteLine("----------------");
 
-            
+
 
             Console.ReadLine();
         }
