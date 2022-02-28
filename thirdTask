@@ -1,6 +1,6 @@
 /***************************
  *Author: Novoselov Stepan *
- *Date: 24.02.2022         *
+ *Date: 28.02.2022         *
  *Exercise 3               *
  ***************************/
 using System;
@@ -14,8 +14,8 @@ namespace Program
         {
             size = 3;
         }
-        public int[,] mainArray = new int[100, 100];
-        public int[,] auxiliaryArray = new int[100, 100];
+        public int[,] MainArray = new int[100, 100];
+        public int[,] AuxiliaryArray = new int[100, 100];
         public int DeterminantValue = 0;
 
         //Рандомное заполнение матрицы(ввод)
@@ -26,33 +26,33 @@ namespace Program
             {
                 for (int column = 0; column < size; ++column)
                 {
-                    mainArray[row, column] = random.Next(1, 10);
+                    MainArray[row, column] = random.Next(1, 10);
                 }
             }
         }
 
         //Вывод матрицы
-        public void Output(int [,] array)
+        public void Output(int[,] Array)
         {
             for (int row = 0; row < size; ++row)
             {
                 for (int column = 0; column < size; ++column)
                 {
-                    Console.Write(array[row, column] + "\t");
+                    Console.Write(Array[row, column] + "\t");
                 }
                 Console.WriteLine("\n");
             }
         }
 
-        public void ReverseMatrixOutput(int[,] array)
+        public void ReverseMatrixOutput(int[,] Array)
         {
             if (DeterminantValue != 0)
             {
                 for (int row = 0; row < size; ++row)
                 {
                     for (int column = 0; column < size; ++column)
-                    { 
-                        Console.Write(array[row, column] + $"/{DeterminantValue}\t\t");
+                    {
+                        Console.Write(Array[row, column] + $"/{DeterminantValue}\t\t");
                     }
                     Console.WriteLine("\n");
                 }
@@ -63,24 +63,24 @@ namespace Program
             }
         }
 
-        public void Addition(int[,] firstArray, int[,] secondArray)
+        public void Addition(int[,] FirstArray, int[,] SecondArray)
         {
             for (int row = 0; row < size; ++row)
             {
                 for (int column = 0; column < size; ++column)
                 {
-                    mainArray[row, column] = firstArray[row, column] + secondArray[row, column];
+                    MainArray[row, column] = FirstArray[row, column] + SecondArray[row, column];
                 }
             }
         }
 
-        public void Multiplication(int[,] firstArray, int[,] secondArray)
+        public void Multiplication(int[,] FirstArray, int[,] SecondArray)
         {
             for (int row = 0; row < size; ++row)
             {
                 for (int column = 0; column < size; ++column)
                 {
-                    mainArray[row, column] = firstArray[row, column] * secondArray[row, column];
+                    MainArray[row, column] = FirstArray[row, column] * SecondArray[row, column];
                 }
             }
         }
@@ -90,49 +90,59 @@ namespace Program
             {
                 for (int column = 0; column < size; ++column)
                 {
-                    mainArray[row, column] = 0;
+                    MainArray[row, column] = 0;
                 }
             }
         }
-        public void Determinant(int[,] mainArray)
+        public void Determinant(int[,] Array)
         {
             int Determinant = 0;
-            Determinant = mainArray[0, 0] * mainArray[1, 1] * mainArray[2, 2] + mainArray[2, 0] * mainArray[0, 1] * mainArray[1, 2] +
-                          mainArray[1, 0] * mainArray[2, 1] * mainArray[0, 2] - mainArray[2, 0] * mainArray[1, 1] * mainArray[0, 2] - 
-                          mainArray[1, 0] * mainArray[0, 1] * mainArray[2, 2] - mainArray[0, 0] * mainArray[1, 2] * mainArray[2, 1];
+            Determinant = Array[0, 0] * Array[1, 1] * Array[2, 2] + Array[2, 0] * Array[0, 1] * Array[1, 2] +
+                          Array[1, 0] * Array[2, 1] * Array[0, 2] - Array[2, 0] * Array[1, 1] * Array[0, 2] -
+                          Array[1, 0] * Array[0, 1] * Array[2, 2] - Array[0, 0] * Array[1, 2] * Array[2, 1];
             DeterminantValue = Determinant;
         }
 
-        public void Comparison(int det1, int det2)
+        public void Comparison(int FirstDeterminant, int SecondDeterminant)
         {
-            if (det1 > det2)
+            if (FirstDeterminant > SecondDeterminant)
             {
-                Console.WriteLine($"Определитель первой матрицы больше и равен {det1}");
+                Console.WriteLine($"Определитель первой матрицы больше и равен {FirstDeterminant}");
             }
-            else if (det1 < det2)
+            else if (FirstDeterminant < SecondDeterminant)
             {
-                Console.WriteLine($"Определитель второй матрицы больше и равен {det2}");
+                Console.WriteLine($"Определитель второй матрицы больше и равен {SecondDeterminant}");
             }
-            else if (det1 == det2)
+            else if (FirstDeterminant == SecondDeterminant)
             {
-                Console.WriteLine($"Оба определителя матриц равны {det1}");
+                Console.WriteLine($"Оба определителя матриц равны {FirstDeterminant}");
             }
         }
 
-        public void ReverseMatrix(int [,] mainArray)
+        public void ReverseMatrix(int[,] MainArray)
         {
-            auxiliaryArray[0, 0] = mainArray[1, 1] * mainArray[2, 2] - mainArray[1, 2] * mainArray[2, 1];
-            auxiliaryArray[0, 1] = -(mainArray[1, 0] * mainArray[2, 2] - mainArray[1, 2] * mainArray[2, 0]);
-            auxiliaryArray[0, 2] = mainArray[1, 0] * mainArray[2, 1] - mainArray[1, 1] * mainArray[2, 0];
-            auxiliaryArray[1, 0] = -(mainArray[0, 1] * mainArray[2, 2] - mainArray[0, 2] * mainArray[2, 1]);
-            auxiliaryArray[1, 1] = mainArray[0, 0] * mainArray[2, 2] - mainArray[0, 2] * mainArray[2, 0];
-            auxiliaryArray[1, 2] = -(mainArray[0, 0] * mainArray[2, 1] - mainArray[0, 1] * mainArray[2, 0]);
-            auxiliaryArray[2, 0] = mainArray[0, 1] * mainArray[1, 2] - mainArray[0, 2] * mainArray[1, 1];
-            auxiliaryArray[2, 1] = -(mainArray[0, 0] * mainArray[1, 2] - mainArray[0, 2] * mainArray[1, 0]);
-            auxiliaryArray[2, 2] = mainArray[0, 0] * mainArray[1, 1] - mainArray[0, 1] * mainArray[1, 0];
+            AuxiliaryArray[0, 0] = MainArray[1, 1] * MainArray[2, 2] - MainArray[1, 2] * MainArray[2, 1];
+            AuxiliaryArray[0, 1] = -(MainArray[1, 0] * MainArray[2, 2] - MainArray[1, 2] * MainArray[2, 0]);
+            AuxiliaryArray[0, 2] = MainArray[1, 0] * MainArray[2, 1] - MainArray[1, 1] * MainArray[2, 0];
+            AuxiliaryArray[1, 0] = -(MainArray[0, 1] * MainArray[2, 2] - MainArray[0, 2] * MainArray[2, 1]);
+            AuxiliaryArray[1, 1] = MainArray[0, 0] * MainArray[2, 2] - MainArray[0, 2] * MainArray[2, 0];
+            AuxiliaryArray[1, 2] = -(MainArray[0, 0] * MainArray[2, 1] - MainArray[0, 1] * MainArray[2, 0]);
+            AuxiliaryArray[2, 0] = MainArray[0, 1] * MainArray[1, 2] - MainArray[0, 2] * MainArray[1, 1];
+            AuxiliaryArray[2, 1] = -(MainArray[0, 0] * MainArray[1, 2] - MainArray[0, 2] * MainArray[1, 0]);
+            AuxiliaryArray[2, 2] = MainArray[0, 0] * MainArray[1, 1] - MainArray[0, 1] * MainArray[1, 0];
         }
 
-
+        public bool DeterminantZero(int DeterminantValue)
+        {
+            if (DeterminantValue == 0)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        }
     }
     class MainProgram
     {
@@ -145,43 +155,50 @@ namespace Program
 
             FirstMatrix.Input();
             Console.WriteLine("Первая матрица\n" + "--------------------");
-            FirstMatrix.Output(FirstMatrix.mainArray);
+            FirstMatrix.Output(FirstMatrix.MainArray);
             Console.WriteLine("--------------------");
 
             SecondMatrix.Input();
             Console.WriteLine("Вторая матрица\n" + "--------------------");
-            SecondMatrix.Output(SecondMatrix.mainArray);
+            SecondMatrix.Output(SecondMatrix.MainArray);
             Console.WriteLine("--------------------");
 
             Console.WriteLine("Сложение\n" + "--------------------");
-            Result.Addition(FirstMatrix.mainArray, SecondMatrix.mainArray);
-            Result.Output(Result.mainArray);
+            Result.Addition(FirstMatrix.MainArray, SecondMatrix.MainArray);
+            Result.Output(Result.MainArray);
             Console.WriteLine("--------------------");
 
             Result.OverLoad();
 
             Console.WriteLine("Умножение\n" + "--------------------");
-            Result.Multiplication(FirstMatrix.mainArray, SecondMatrix.mainArray);
-            Result.Output(Result.mainArray);
+            Result.Multiplication(FirstMatrix.MainArray, SecondMatrix.MainArray);
+            Result.Output(Result.MainArray);
             Console.WriteLine("--------------------");
 
             //Определитель
             Console.WriteLine("------------------------------------------------");
-            FirstMatrix.Determinant(FirstMatrix.mainArray);
-            SecondMatrix.Determinant(SecondMatrix.mainArray);
+            FirstMatrix.Determinant(FirstMatrix.MainArray);
+            SecondMatrix.Determinant(SecondMatrix.MainArray);
             Result.Comparison(FirstMatrix.DeterminantValue, SecondMatrix.DeterminantValue);
             Console.WriteLine("------------------------------------------------");
 
             Console.WriteLine("Первая обратная матрица\n" + "------------------------------------------------");
-            FirstMatrix.ReverseMatrix(FirstMatrix.mainArray);
-            FirstMatrix.ReverseMatrixOutput(FirstMatrix.auxiliaryArray);
+            FirstMatrix.ReverseMatrix(FirstMatrix.MainArray);
+            FirstMatrix.ReverseMatrixOutput(FirstMatrix.AuxiliaryArray);
             Console.WriteLine("------------------------------------------------");
 
             Console.WriteLine("Вторая обратная матрица\n" + "------------------------------------------------");
-            SecondMatrix.ReverseMatrix(SecondMatrix.mainArray);
-            SecondMatrix.ReverseMatrixOutput(SecondMatrix.auxiliaryArray);
+            SecondMatrix.ReverseMatrix(SecondMatrix.MainArray);
+            SecondMatrix.ReverseMatrixOutput(SecondMatrix.AuxiliaryArray);
             Console.WriteLine("------------------------------------------------");
 
+            //True or false
+            Console.WriteLine("Первая матрица\n" + "----------------");
+            Console.WriteLine(FirstMatrix.DeterminantZero(FirstMatrix.DeterminantValue));
+            Console.WriteLine("----------------");
+            Console.WriteLine("Вторая матрица\n" + "----------------");
+            Console.WriteLine(SecondMatrix.DeterminantZero(SecondMatrix.DeterminantValue));
+            Console.WriteLine("----------------");
 
             Console.ReadLine();
         }
