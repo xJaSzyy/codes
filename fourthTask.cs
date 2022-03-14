@@ -48,15 +48,17 @@ namespace Serialization
                 Console.WriteLine($"Author: {NewWordFile.Author}");
             }
 
+            // enter keyword
             Console.Write("Enter keyword: ");
             string path = Console.ReadLine();
             
+            // search file and enter info
             FileInfo fileInfo = new FileInfo($"D:/Users/student/desktop/{path}.txt");
             if (fileInfo.Exists)
             {
-                Console.WriteLine($"Имя файла: {fileInfo.Name}");
-                Console.WriteLine($"Время создания: {fileInfo.CreationTime}");
-                Console.WriteLine($"Размер: {fileInfo.Length}");
+                Console.WriteLine($"File name: {fileInfo.Name}");
+                Console.WriteLine($"Time of creation: {fileInfo.CreationTime}");
+                Console.WriteLine($"Size: {fileInfo.Length}");
             }
             else
             {
