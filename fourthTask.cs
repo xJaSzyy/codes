@@ -47,6 +47,21 @@ namespace Serialization
                 Console.WriteLine("Object deserialized");
                 Console.WriteLine($"Author: {NewWordFile.Author}");
             }
+
+            Console.Write("Enter keyword: ");
+            string path = Console.ReadLine();
+            
+            FileInfo fileInfo = new FileInfo($"D:/Users/student/desktop/{path}.txt");
+            if (fileInfo.Exists)
+            {
+                Console.WriteLine($"Имя файла: {fileInfo.Name}");
+                Console.WriteLine($"Время создания: {fileInfo.CreationTime}");
+                Console.WriteLine($"Размер: {fileInfo.Length}");
+            }
+            else
+            {
+                Console.WriteLine("File not found");
+            }
         }
     }
 }
