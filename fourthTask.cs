@@ -1,6 +1,6 @@
 /***************************
  *Author: Novoselov Stepan *
- *Date: 14.03.2022         *
+ *Date: 21.03.2022         *
  *Exercise 4               *
  ***************************/
 using System;
@@ -26,12 +26,16 @@ namespace Serialization
     
     class Program
     {
+        static string FileName;
         public static void CreateFile()
         {
             try
-            {
+            { 
                 Console.Write("Enter file name: ");
-                FileStream StreamFile = new FileStream(Console.ReadLine() + ".txt", FileMode.Create);
+                FileName = Console.ReadLine();
+                
+                File.Move($"C:/Users/student/source/repos/Serialization/Serialization/bin/Debug/netcoreapp3.1/{FileName}.txt", $"C:/Users/student/source/repos/Serialization/Serialization/bin/Debug/netcoreapp3.1/{FileName}Copy.txt");
+                FileStream StreamFile = new FileStream(FileName + ".txt", FileMode.Create);
                 Console.WriteLine("File text: ");
                 string text = Console.ReadLine();
                 StreamWriter TextWriter = new StreamWriter(StreamFile);
@@ -49,14 +53,22 @@ namespace Serialization
                 using (StreamReader ReaderStream = new StreamReader(Console.ReadLine() + ".txt"))
                 {
                     string Line;
-                    Console.WriteLine("File text: \n");
+                    Console.WriteLine("File text: ");
                     while ((Line = ReaderStream.ReadLine()) != null)
-                    { Console.WriteLine(Line); }
+                    { Console.WriteLine(Line + "\n"); }
                 }
             }
             catch (Exception exeption)
             { Console.WriteLine("File opening error: {0}", exeption.Message); }
         }
+
+        public static void RollbackChanges()
+        {
+            File.Delete($"C:/Users/student/source/repos/Serialization/Serialization/bin/Debug/netcoreapp3.1/{FileName}.txt");
+            File.Move($"C:/Users/student/source/repos/Serialization/Serialization/bin/Debug/netcoreapp3.1/{FileName}Copy.txt", $"C:/Users/student/source/repos/Serialization/Serialization/bin/Debug/netcoreapp3.1/{FileName}.txt");
+            Console.WriteLine("Rollback was successful");
+        }
+        
         static void Main(string[] args)
         {
             // object for serialize
@@ -105,7 +117,7 @@ namespace Serialization
             do
             {
                 Console.WriteLine("***********       Menu       ***********");
-                Console.WriteLine("Create file to write text -- 1\nOpen created file for reading -- 2\nExit -- 3");
+                Console.WriteLine("Create file to write text -- 1\nOpen created file for reading -- 2\nRollback changes -- 3\nExit -- 4");
                 Console.WriteLine("****************************************");
 
                 switch (Int16.Parse(Console.ReadLine()))
@@ -117,6 +129,9 @@ namespace Serialization
                         OpenFile();
                         break;
                     case 3:
+                        RollbackChanges();
+                        break;
+                    case 4:
                         OpenMenu = false;
                         break;
                     default:
@@ -127,3 +142,4 @@ namespace Serialization
         }
     }
 }
+
