@@ -16,44 +16,42 @@ namespace StringsAndCollections
     {
         static void Main(string[] args)
         {
-            string[] oldWord = { "пирвет", "првиет" };
-            string newWord = "привет";
-            string str = System.IO.File.ReadAllText(@"D:/Users/student/Desktop/textFile.txt", Encoding.Default).Replace("\n", " ");
+            string[] OldWord = { "пирвет", "првиет" };
+            string NewWord = "привет";
+            string FileText = System.IO.File.ReadAllText(@"D:/Users/student/Desktop/textFile.txt", Encoding.Default).Replace("\n", " ");
 
-            string newStr = string.Join(" ", str.Split().Select(w => w = ReplaseWord(w, oldWord, newWord)));
+            string NewFileText = string.Join(" ", FileText.Split().Select(w => w = ReplaseWord(w, OldWord, NewWord)));
 
-            
-
-            string before = @"(.012.\D*345\S*67\S*89)";
-            string after = @"+380 12 345 67 89";
+            string Before = @"(.012.\D*345\S*67\S*89)";
+            string After = @"+380 12 345 67 89";
 
 
-            newStr = Regex.Replace(newStr, before, after);
+            NewFileText = Regex.Replace(NewFileText, Before, After);
 
-            Console.WriteLine(" {0} \n {1}", "До: \n" + str, "После: \n" + newStr);
+            Console.WriteLine(" {0} \n {1}", "До: \n" + FileText, "После: \n" + NewFileText);
             Console.ReadKey();
-            
+
         }
 
-        
-        static string ReplaseWord(string nextWord, string[] oldWord, string newWord)
-        {
-            string punct = string.Empty;
-            string word = nextWord;
 
-            foreach (char ch in nextWord)
+        static string ReplaseWord(string NextWord, string[] OldWord, string NewWord)
+        {
+            string Punct = string.Empty;
+            string Word = NextWord;
+
+            foreach (char ch in NextWord)
             {
-                if (word == oldWord[0])
+                if (Word == OldWord[0])
                 {
-                    return newWord;
+                    return NewWord;
                 }
-                if (word == oldWord[1])
+                if (Word == OldWord[1])
                 {
-                    return newWord;
+                    return NewWord;
                 }
 
             }
-            return word;
+            return Word;
 
         }
     }
