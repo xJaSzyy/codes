@@ -1,12 +1,13 @@
 /***************************
  *Author: Novoselov Stepan *
- *Date: 28.03.2022         *
+ *Date: 4.04.2022         *
  *Exercise 5               *
  ***************************/
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace StringsAndCollections
@@ -17,14 +18,16 @@ namespace StringsAndCollections
         {
             string[] oldWord = { "пирвет", "првиет" };
             string newWord = "привет";
-            string str = "привет пирвет првиет";
+            string str = System.IO.File.ReadAllText(@"D:/Users/student/Desktop/textFile.txt", Encoding.Default).Replace("\n", " ");
 
             string newStr = string.Join(" ", str.Split().Select(w => w = ReplaseWord(w, oldWord, newWord)));
 
-            Console.WriteLine(" {0} \n {1}", str, newStr);
+            Console.WriteLine(" {0} \n {1}", "До: " + str, "После: " + newStr);
             Console.ReadKey();
+            
         }
 
+        
         static string ReplaseWord(string nextWord, string[] oldWord, string newWord)
         {
             string punct = string.Empty;
@@ -48,7 +51,7 @@ namespace StringsAndCollections
                 }
 
             }
-            return "ошипка";
+            return word;
 
         }
     }
