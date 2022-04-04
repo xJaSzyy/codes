@@ -22,7 +22,15 @@ namespace StringsAndCollections
 
             string newStr = string.Join(" ", str.Split().Select(w => w = ReplaseWord(w, oldWord, newWord)));
 
-            Console.WriteLine(" {0} \n {1}", "До: " + str, "После: " + newStr);
+            
+
+            string before = @"((012)\D*345\S*67\S*89)";
+            string after = @"+380 12 345 67 89";
+
+
+            newStr = Regex.Replace(newStr, before, after);
+
+            Console.WriteLine(" {0} \n {1}", "До: \n" + str, "После: \n" + newStr);
             Console.ReadKey();
             
         }
@@ -35,12 +43,6 @@ namespace StringsAndCollections
 
             foreach (char ch in nextWord)
             {
-               
-                if (char.IsPunctuation(ch) && ch != '-' && ch != '_')
-                {
-                    punct = ch.ToString();
-                    word = word.Replace(punct, string.Empty);
-                }
                 if (word == oldWord[0])
                 {
                     return newWord;
