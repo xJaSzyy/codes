@@ -24,7 +24,7 @@ namespace StringsAndCollections
 
             
 
-            string before = @"((012)\D*345\S*67\S*89)";
+            string before = @"(.012.\D*345\S*67\S*89)";
             string after = @"+380 12 345 67 89";
 
 
