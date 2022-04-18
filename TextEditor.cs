@@ -1,3 +1,5 @@
+//Author: Novoselov Stepan //
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,11 +18,18 @@ namespace ТекстовыйРедактор
             InitializeComponent();
         }
 
-        private void открытьToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            TextField1.Clear();
+            OpenFile.FileName = @"Текстовый файл.txt";
+            OpenFile.Filter = "Текстовые файлы (*.txt)|*.txt|All files (*.*)|*.*";
+            SaveFile.Filter = "Текстовые файлы (*.txt)|*.txt|All files (*.*)|*.*";
+        }
+
+        private void Opener()
         {
             OpenFile.ShowDialog();
             System.Windows.Forms.Form.ActiveForm.Text = OpenFile.FileName;
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             if (OpenFile.FileName == String.Empty)
             {
                 return;
@@ -39,17 +48,19 @@ namespace ТекстовыйРедактор
                          "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             catch (Exception Situation) // отчет о других ошибках
-            { 
+            {
                 MessageBox.Show(Situation.Message,
                      "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            
+        }
+        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Opener();
         }
 
-        private void сохранитьКакToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void сохранитькакToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFile.FileName = OpenFile.FileName;
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             if (SaveFile.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -68,17 +79,34 @@ namespace ТекстовыйРедактор
             }
         }
 
-        private void выходToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            TextField.Clear();
-            OpenFile.FileName = @"Текстовый файл.txt";
-            OpenFile.Filter = "Текстовые файлы (*.txt)|*.txt|All files (*.*)|*.*";
-            SaveFile.Filter = "Текстовые файлы (*.txt)|*.txt|All files (*.*)|*.*";
+            Opener();
+        }
+
+        private void отменадействияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextField.Undo();
+        }
+
+        private void вырезатьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextField.Cut();
+        }
+
+        private void копироватьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextField.Copy();
+        }
+
+        private void вставкаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextField.Paste();
         }
     }
 }
