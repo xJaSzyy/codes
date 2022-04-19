@@ -14,13 +14,27 @@ namespace DiscordBot
             new Program().MainAsync().GetAwaiter().GetResult();
         }
 
+        public static int GenerateRandomOddNumber()
+        {
+            Random rnd = new Random();
+
+            int number = 0;
+            do
+            {
+                number = rnd.Next(1, 10);
+            }
+            while (number % 2 == 0);
+
+            return number;
+        }
+
         private async Task MainAsync()
         {
             Client = new DiscordSocketClient();
             Client.MessageReceived += CommandHandler;
             Client.Log += Log;
 
-            var Token = "OTYyOTIxODUwNzkzNTA0Nzg4.YlOk2w.H2TC1MqirtTqsXvUjtL94Z2-BxU";
+            var Token = "OTYyOTIxODUwNzkzNTA0Nzg4.YlOk2w.Evgs6x1XPz7vP9-KlBW0JlNJZ14";
             await Client.LoginAsync(TokenType.Bot, Token);
             await Client.StartAsync();
 
@@ -53,8 +67,7 @@ namespace DiscordBot
                             string path = @"C:/Users/Степан/Desktop/Bot.txt";
                             string line;
                             int LineNumber = 0;
-                            Random rnd = new Random();
-                            int TaskNumber = rnd.Next(1, 5); 
+                            int TaskNumber = GenerateRandomOddNumber();
 
                             StreamReader sr = new StreamReader(path);
                                 
@@ -65,6 +78,8 @@ namespace DiscordBot
                             {
                                 if (TaskNumber == LineNumber)
                                 {
+                                    msg.Channel.SendMessageAsync(line);
+                                    line = sr.ReadLine();
                                     msg.Channel.SendMessageAsync(line);
                                     break;
                                 }
