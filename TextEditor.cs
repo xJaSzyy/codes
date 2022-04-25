@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ТекстовыйРедактор
+namespace TextEditor
 {
     public partial class Form1 : Form
     {
@@ -37,9 +37,10 @@ namespace ТекстовыйРедактор
             // Чтение текстового файла
             try
             {
+                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
                 var Reader = new System.IO.StreamReader(
                 OpenFile.FileName, Encoding.GetEncoding(1251));
-                TextField.Text = Reader.ReadToEnd();
+                TextField1.Text = Reader.ReadToEnd();
                 Reader.Close();
             }
             catch (System.IO.FileNotFoundException Situation)
@@ -53,22 +54,29 @@ namespace ТекстовыйРедактор
                      "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
             Opener();
         }
 
-        private void сохранитькакToolStripMenuItem_Click(object sender, EventArgs e)
+        private void открытьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Opener();
+        }
+
+        private void сохранитьКакToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             SaveFile.FileName = OpenFile.FileName;
             if (SaveFile.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
+                    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
                     var Writer = new System.IO.StreamWriter(
                     SaveFile.FileName, false,
                     System.Text.Encoding.GetEncoding(1251));
-                    Writer.Write(TextField.Text);
+                    Writer.Write(TextField1.Text);
                     Writer.Close();
                 }
                 catch (Exception Situation)
@@ -79,34 +87,29 @@ namespace ТекстовыйРедактор
             }
         }
 
-        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        private void выходToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void копироватьToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Opener();
+            TextField1.Copy();
         }
 
-        private void отменадействияToolStripMenuItem_Click(object sender, EventArgs e)
+        private void вставкаToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            TextField.Undo();
+            TextField1.Paste();
         }
 
-        private void вырезатьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void вырезатьToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            TextField.Cut();
+            TextField1.Cut();
         }
 
-        private void копироватьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void отменитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TextField.Copy();
-        }
-
-        private void вставкаToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TextField.Paste();
+            TextField1.Undo();
         }
     }
 }
