@@ -11,32 +11,24 @@ namespace DiscordBot
     class Program
     {
         DiscordSocketClient? Client;
-        System.Timers.Timer timer = new System.Timers.Timer() { Interval = 600000 };
+        System.Timers.Timer timer = new System.Timers.Timer() { Interval = 10000 };
         static int task = 1;
+
         static void Main(string[] args)
         {
-            
             new Program().MainAsync().GetAwaiter().GetResult();
         }
 
         public static int GenerateRandomOddNumber()
         {
             Random rnd = new Random();
-
             int number = 0;
+            number = rnd.Next(1, 30);
             while (number % 2 == 0)
             {
-                if (number % 2 != 0)
-                {
-                    return number;
-                }
-                else
-                {
-                    number = rnd.Next(1, 10);
-                }
+                number = rnd.Next(1, 30);
             }
             return number;
-            
         }
 
         private void SetTimer(SocketMessage msg)
@@ -55,10 +47,11 @@ namespace DiscordBot
 
         public static void EnglishTasks(SocketMessage msg)
         {
-            string path = @"C:/Users/Степан/Desktop/Bot.txt";
+            string path = @"C:/Users/Степан/Desktop/bot.txt";
             string line;
-            int LineNumber = 1;
+            
             int TaskNumber = GenerateRandomOddNumber();
+            int LineNumber = TaskNumber;
 
             StreamReader sr = new StreamReader(path);
 
@@ -66,18 +59,15 @@ namespace DiscordBot
 
             while (line != null)
             {
-                if (TaskNumber == LineNumber)
-                {
-                    msg.Channel.SendMessageAsync($"Задание {task}");
-                    ++task;
-                    msg.Channel.SendMessageAsync(line);
-                    line = sr.ReadLine();
-                    ++LineNumber;
-                    msg.Channel.SendMessageAsync(line);
-                    break;
-                }
+                msg.Channel.SendMessageAsync($"Задание {task}");
+                ++task;
+                msg.Channel.SendMessageAsync(line);
                 line = sr.ReadLine();
                 ++LineNumber;
+                msg.Channel.SendMessageAsync(line);
+                line = sr.ReadLine();
+                ++LineNumber;
+                break;
             }
             sr.Close();
         }
@@ -87,7 +77,7 @@ namespace DiscordBot
             Client.MessageReceived += CommandHandler;
             Client.Log += Log;
 
-            var Token = "OTYyOTIxODUwNzkzNTA0Nzg4.YlOk2w.w2aVDGjwDqjVSIvuqW8BubP20aU";
+            var Token = "";
             await Client.LoginAsync(TokenType.Bot, Token);
             await Client.StartAsync();
 
@@ -131,7 +121,5 @@ namespace DiscordBot
             return Task.CompletedTask;
 
         }
-
-
     }
 }
